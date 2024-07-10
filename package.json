@@ -15,7 +15,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "https://github.com/WLowe10/ts-lib-gen"
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --dts --format esm",
