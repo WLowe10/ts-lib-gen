@@ -7,10 +7,11 @@ import { readDir } from "../utils/read-dir.js";
 import { kebabify } from "../utils/kebabify.js";
 import { dirInsideGitRepo, createGitRepo } from "../utils/git.js";
 import { installDependencies } from "../utils/install-dependencies.js";
+import { PKG_ROOT } from "../constants.js";
 import type { PromptData } from "./prompt.js";
 
 const templateFileExtension = ".mustache";
-const templateDir = path.resolve(import.meta.dirname, "../../template");
+const templateDir = path.resolve(PKG_ROOT, "template");
 
 export async function generate(promptData: PromptData) {
 	const flags = promptData.flags;
