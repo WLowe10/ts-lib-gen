@@ -26,7 +26,7 @@ export async function generate(promptData: PromptData) {
 	} else {
 		libName = path.basename(promptData.name);
 		libNameKebab = kebabify(libName);
-		libDir = path.join(process.cwd(), promptData.name.replace(libName, kebabify(libName)));
+		libDir = path.join(process.cwd(), promptData.name.replace(libName, libNameKebab));
 	}
 
 	const templateData = {
@@ -37,7 +37,7 @@ export async function generate(promptData: PromptData) {
 	};
 
 	// read all files in the template directoy
-	const templateFiles = await readDir(path.join(templateDir));
+	const templateFiles = await readDir(templateDir);
 
 	// copy all files to the lib directory
 	for (const file of templateFiles) {
