@@ -89,12 +89,14 @@ export async function generate(promptData: PromptData) {
 		} else {
 			try {
 				await createGitRepo(libDir);
+
+				s.stop("Git repo created");
 			} catch {
 				console.log(chalk.red(`Failed to create git repo, skipping`));
+
+				s.stop();
 			}
 		}
-
-		s.stop("Git repo created");
 	}
 
 	// install dependencies
