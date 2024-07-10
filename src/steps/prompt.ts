@@ -13,8 +13,6 @@ export type PromptData = {
 };
 
 export async function prompt(): Promise<PromptData> {
-	p.intro("create-ts-lib");
-
 	const group = await p.group(
 		{
 			name: () =>
