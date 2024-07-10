@@ -1,16 +1,21 @@
 {
-	"name": "create-ts-lib",
+	"name": "create-ts-lib-gen",
 	"version": "1.0.0",
-	"description": "Create a TS library with create-ts-lib",
+	"description": "Quickly generate a TS library",
 	"license": "MIT",
 	"type": "module",
 	"keywords": [
-		"create-ts-lib",
-		"typescript"
+		"ts-lib-gen",
+		"typescript",
+		"template"
 	],
 	"author": {
 		"name": "Wes Lowe",
 		"email": "wesley.jlowe10@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --dts --format esm",
@@ -22,7 +27,7 @@
 		"type-check": "tsc --noEmit"
 	},
 	"bin": {
-		"create-ts-lib": "./dist/index.js"
+		"create-ts-lib-gen": "./dist/index.js"
 	},
 	"files": [
 		"dist",

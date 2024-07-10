@@ -17,6 +17,5 @@ export async function dirInsideGitRepo(dir: string) {
 export async function createGitRepo(dir: string) {
 	await execa("git", ["init"], {
 		cwd: dir,
-		stdio: "inherit",
 	});
 }

@@ -34,6 +34,12 @@ export async function prompt(): Promise<PromptData> {
 				p.text({
 					message: "Enter keywords (separated by comma)",
 				}),
+			version: () =>
+				p.text({
+					message: "Version",
+					defaultValue: "1.0.0",
+					placeholder: "1.0.0",
+				}),
 			authorName: () =>
 				p.text({
 					message: "What is your name?",
@@ -42,6 +48,7 @@ export async function prompt(): Promise<PromptData> {
 				p.text({
 					message: "What is your email?",
 				}),
+
 			// --- flags ---
 			shouldInitGitRepo: () =>
 				p.confirm({

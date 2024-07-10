@@ -3,12 +3,12 @@
 	"version": "1.0.0",
 	"description": "",
 	"license": "MIT",
+	"author": "",
+	"keywords": [],
 	"repository": {
 		"type": "git",
 		"url": ""
 	},
-	"author": "",
-	"keywords": [],
 	"type": "module",
 	"sideEffects": false,
 	"main": "./dist/index.cjs",
