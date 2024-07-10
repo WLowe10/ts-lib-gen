@@ -1,6 +1,6 @@
 {
 	"name": "create-ts-lib-gen",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Quickly generate a TS library",
 	"license": "MIT",
 	"type": "module",
@@ -31,8 +31,9 @@
 	},
 	"files": [
 		"dist",
-		"template",
 		"package.json",
+		"template",
+		"template/.gitignore",
 		"README.md"
 	],
 	"dependencies": {
