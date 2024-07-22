@@ -3,12 +3,12 @@ import fs from "fs/promises";
 import mustache from "mustache";
 import chalk from "chalk";
 import * as p from "@clack/prompts";
-import { readDir } from "../utils/read-dir.js";
-import { kebabify } from "../utils/kebabify.js";
-import { dirInsideGitRepo, createGitRepo } from "../utils/git.js";
-import { installDependencies } from "../utils/install-dependencies.js";
-import { PKG_ROOT } from "../constants.js";
-import type { PromptData } from "./prompt.js";
+import { readDir } from "../utils/read-dir";
+import { kebabify } from "../utils/kebabify";
+import { dirInsideGitRepo, createGitRepo } from "../utils/git";
+import { installDependencies } from "../utils/install-dependencies";
+import { PKG_ROOT } from "../constants";
+import type { PromptData } from "./prompt";
 
 const templateFileExtension = ".mustache";
 const templateDir = path.resolve(PKG_ROOT, "template");

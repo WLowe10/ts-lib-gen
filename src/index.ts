@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import * as p from "@clack/prompts";
-import { prompt } from "./steps/prompt.js";
-import { generate } from "./steps/generate.js";
+import { prompt } from "./steps/prompt";
+import { generate } from "./steps/generate";
 
 p.intro("create-ts-lib");
 
