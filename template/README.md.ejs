@@ -1,0 +1,21 @@
+# <%- lib.name %>
+<% if (lib.description) { %>
+> <%- lib.description %> 
+<% } %>
+## Install
+
+```sh
+npm i <%- lib.package_name %>
+# or
+yarn add <%- lib.package_name %>
+# or
+pnpm add <%- lib.package_name %>
+```
+
+## Usage
+
+```typescript
+import { test } from "<%- lib.package_name %>";
+
+test(); // -> "Hello world from <%- lib.name %>!"
+```

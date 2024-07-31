@@ -1,10 +1,10 @@
 {
-	"name": "",
-	"version": "1.0.0",
-	"description": "",
+	"name": "<%- lib.package_name %>",
+	"version": "<%- lib.version || "1.0.0" %>",
+	"description": "<%- lib.description %>",
 	"license": "MIT",
-	"author": "",
-	"keywords": [],
+	"author": <%- JSON.stringify(lib.author) %>,
+	"keywords": <%- JSON.stringify(lib.keywords) %>,
 	"repository": {
 		"type": "git",
 		"url": ""
@@ -32,7 +32,7 @@
 		"README.md"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --dts --format esm",
+		"build": "tsup src/index.ts --dts --format esm,cjs",
 		"format": "prettier --write .",
 		"publish-package": "pnpm build && pnpm publish",
 		"clean": "pnpm clean:dist && pnpm clean:modules",
