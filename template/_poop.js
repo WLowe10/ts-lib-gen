@@ -92,8 +92,6 @@ export async function before(ctx) {
 		email: result.author_email,
 	};
 
-	packageJSONEntry.path = path.join(ctx.dir.path, "../package.json");
-
 	packageJSONEntry.content = JSON.stringify(pkg, null, 4);
 }
 
