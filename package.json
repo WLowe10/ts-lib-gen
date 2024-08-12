@@ -1,6 +1,6 @@
 {
 	"name": "create-ts-lib-gen",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "Quickly generate a TS library",
 	"license": "MIT",
 	"type": "module",
@@ -39,7 +39,7 @@
 		"@clack/prompts": "^0.7.0",
 		"chalk": "^5.3.0",
 		"execa": "^9.3.0",
-		"poopgen": "^0.2.1"
+		"poopgen": "^0.2.2"
 	},
 	"devDependencies": {
 		"@types/node": "^20.14.13",
