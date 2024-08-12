@@ -1,10 +1,10 @@
 {
-	"name": "<%- lib.package_name %>",
-	"version": "<%- lib.version || "1.0.0" %>",
-	"description": "<%- lib.description %>",
+	"name": "",
+	"version": "",
+	"description": "",
 	"license": "MIT",
-	"author": <%- JSON.stringify(lib.author) %>,
-	"keywords": <%- JSON.stringify(lib.keywords) %>,
+	"author": "",
+	"keywords": [],
 	"repository": {
 		"type": "git",
 		"url": ""

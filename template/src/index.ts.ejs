@@ -1,1 +1,13 @@
-export function test() { return "Hello world from <%- lib.name %>!" }
+export declare namespace <%- lib.camel_name %> {
+	type Options = {
+		mood: "happy" | "neutral" | "annoyed";
+	};
+}
+
+export function <%- lib.camel_name %>(opts: <%- lib.camel_name %>.Options) {
+	return opts.mood === "annoyed"
+		? "Hello World..."
+		: opts.mood === "neutral"
+			? "Hello World."
+			: "Hello World!";
+}

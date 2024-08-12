@@ -32,7 +32,6 @@ export async function before(ctx) {
 			version: () =>
 				p.text({
 					message: "Version",
-					defaultValue: "1.0.0",
 					placeholder: "1.0.0",
 				}),
 			author_name: () =>
@@ -52,16 +51,17 @@ export async function before(ctx) {
 		}
 	);
 
-	// const { dir, name, packageName } = utils.parseProjectName(result.name, ctx);
-	const { dir, name, packageName } = utils.parseProjectName(result.name, ctx);
+	const { dir, name, packageName } = utils.parseProjectName(result.name, ctx.dir.path);
 
+	// split the keywords separated by commas into an array of strings
 	const keywords = typeof result.keywords_csv === "string" ? result.keywords_csv.split(",") : [];
 
 	// set the destination directory
-	ctx.destPath = dir;
+	ctx.dir.path = dir;
 
 	ctx.data.lib = {
 		name: name,
+		camel_name: kebabToCamel(packageName),
 		package_name: packageName,
 		keywords: keywords,
 		description: result.description,
@@ -73,11 +73,33 @@ export async function before(ctx) {
 	};
 
 	ctx.data.node_package_manager = nodePackageManager;
+
+	// --- format package.json ---
+
+	const packageJSONEntry = /** @type {import("poopgen").FileEntry} */ (
+		ctx.dir.entries.find((entry) => entry.path === "package.json")
+	);
+
+	const pkg = JSON.parse(packageJSONEntry.content);
+
+	pkg.name = packageName;
+	pkg.description = result.description;
+	pkg.keywords = keywords;
+	pkg.version = result.version || "1.0.0";
+
+	pkg.author = {
+		name: result.author_name,
+		email: result.author_email,
+	};
+
+	packageJSONEntry.path = path.join(ctx.dir.path, "../package.json");
+
+	packageJSONEntry.content = JSON.stringify(pkg, null, 4);
 }
 
 /** @type{import("poopgen").AfterFn}  */
 export async function after(ctx) {
-	const data = ctx.data;
+	const dest = ctx.dir.path;
 	const packageManager = ctx.data.node_package_manager;
 
 	const result = await p.group(
@@ -101,7 +123,7 @@ export async function after(ctx) {
 
 	// init a git repo in the destination
 	if (result.should_init_git) {
-		await initGit(ctx.destPath);
+		await initGit(dest);
 	}
 
 	// // install node modules with user's package manager in the destination
@@ -112,7 +134,7 @@ export async function after(ctx) {
 			spinner.start("Installing dependencies...");
 
 			await utils.installNodeModules(packageManager, {
-				cwd: ctx.destPath,
+				cwd: dest,
 			});
 
 			spinner.stop("Successfully installed dependencies");
@@ -121,51 +143,74 @@ export async function after(ctx) {
 		}
 	}
 
-	if (process.cwd() !== ctx.destPath) {
-		p.note(`cd ${path.relative(process.cwd(), ctx.destPath)}`, "Next steps");
+	if (process.cwd() !== dest) {
+		p.note(`cd ${path.relative(process.cwd(), dest)}`, "Next steps");
 	}
 }
 
 // --- helpers ---
 
 /**
- * @param {string} dest
+ * Converts a kebab or snake case string into camel case
+ * @param {string} str
  */
-async function initGit(dest) {
+const kebabToCamel = (str) =>
+	str
+		.toLowerCase()
+		.replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace("-", "").replace("_", ""));
+
+/**
+ * @param {string} destPath
+ */
+async function initGit(destPath) {
 	const spinner = p.spinner();
 
+	const dirName = path.parse(destPath).name;
+
+	spinner.start("Initializing git repository...");
+
 	try {
-		spinner.start("Initializing git repository...");
+		const destHasGitRepo = utils.dirHasGitRepo(destPath);
+		const dirIsInsideGitRepo = await utils.dirIsInsideGitRepo(destPath);
 
-		// const destHasGitRepo = utils.dirHasGitRepo(dest);
-		// const dirIsInsideGitRepo = await utils.dirIsInsideGitRepo(dest);
+		if (destHasGitRepo) {
+			spinner.stop();
 
-		// if (destHasGitRepo) {
-		// 	spinner.stop();
+			const shouldOverwriteGit = await p.confirm({
+				message: `${chalk.redBright("Warning:")} There is already a git repository. Initializing a new repository would delete the previous history. Would you like to continue?`,
+				initialValue: false,
+			});
 
-		// 	const should_overwrite_git = await p.confirm({
-		// 		message: `${chalk.redBright("Warning:")} There is already a git repository. Initializing a new repository would delete the previous history. Would you like to continue?`,
-		// 		initialValue: false,
-		// 	});
+			if (!shouldOverwriteGit) {
+				spinner.message("Skipping git initialization.");
 
-		// 	if (!should_overwrite_git) {
-		// 		spinner.message("Skipping git initialization.");
+				return;
+			}
 
-		// 		return;
-		// 	}
+			fs.rmSync(path.join(destPath, ".git"));
+		} else if (dirIsInsideGitRepo) {
+			spinner.stop();
 
-		// 	fs.rmSync(path.join(dest, ".git"));
-		// } else if (dirIsInsideGitRepo) {
-		// }
+			const shouldInitChildGitRepo = await p.confirm({
+				message: `${chalk.redBright.bold(
+					"Warning:"
+				)} "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
+				initialValue: false,
+			});
+
+			if (!shouldInitChildGitRepo) {
+				spinner.message("Skipping git initialization");
+
+				return;
+			}
+		}
 
 		await utils.initGit({
-			cwd: dest,
+			cwd: destPath,
 		});
 
 		spinner.stop("Successfully intialized git repository");
 	} catch {
 		spinner.stop("Failed to initialize git repository, skipping");
 	}
-
-	spinner.stop();
 }

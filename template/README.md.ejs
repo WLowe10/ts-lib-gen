@@ -15,7 +15,7 @@ pnpm add <%- lib.package_name %>
 ## Usage
 
 ```typescript
-import { test } from "<%- lib.package_name %>";
+import { <%- lib.camel_name %> } from "<%- lib.package_name %>";
 
-test(); // -> "Hello world from <%- lib.name %>!"
+<%- lib.camel_name %>({ mood: "happy" }); // -> "Hello World!"
 ```
