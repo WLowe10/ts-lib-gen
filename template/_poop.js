@@ -92,7 +92,7 @@ export async function before(ctx) {
 		email: result.author_email,
 	};
 
-	packageJSONEntry.content = JSON.stringify(pkg, null, 4);
+	packageJSONEntry.content = JSON.stringify(pkg, null, "\t");
 }
 
 /** @type{import("poopgen").AfterFn}  */
