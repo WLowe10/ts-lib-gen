@@ -21,7 +21,7 @@
 		"build": "tsup src/cli.ts --dts --format esm",
 		"format": "prettier --write .",
 		"publish-package": "pnpm build && pnpm publish",
-		"clean": "pnpm clean:dist && pnpm clean:modules",
+		"clean": "pnpm clean:dist && pnpm clean:modules && pnpm clean:dest",
 		"clean:dist": "rm -rf dist",
 		"clean:modules": "rm -rf node_modules",
 		"clean:dest": "rm -rf dest",
