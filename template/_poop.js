@@ -124,7 +124,7 @@ export async function after(ctx) {
 		await initGit(dest);
 	}
 
-	// // install node modules with user's package manager in the destination
+	// install node modules with user's package manager in the destination
 	if (result.should_install_deps) {
 		const spinner = p.spinner();
 

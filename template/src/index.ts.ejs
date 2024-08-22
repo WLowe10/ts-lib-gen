@@ -1,7 +1,7 @@
 export declare namespace <%- lib.camel_name %> {
-	type Options = {
+	interface Options {
 		mood: "happy" | "neutral" | "annoyed";
-	};
+	}
 }
 
 export function <%- lib.camel_name %>(opts: <%- lib.camel_name %>.Options) {

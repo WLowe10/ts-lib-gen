@@ -38,7 +38,7 @@
 		"clean": "pnpm clean:dist && pnpm clean:modules",
 		"clean:dist": "rm -rf dist",
 		"clean:modules": "rm -rf node_modules",
-		"type-check": "tsc --noEmit"
+		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"tsup": "^8.1.0",
