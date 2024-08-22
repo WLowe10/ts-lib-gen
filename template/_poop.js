@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 
-/** @type{import("poopgen").BeforeFn}  */
+/** @type{import("poopgen").BeforeFn} */
 export async function before(ctx) {
 	p.intro("ts-lib-gen");
 
@@ -95,7 +95,7 @@ export async function before(ctx) {
 	packageJSONEntry.content = JSON.stringify(pkg, null, "\t");
 }
 
-/** @type{import("poopgen").AfterFn}  */
+/** @type{import("poopgen").AfterFn} */
 export async function after(ctx) {
 	const dest = ctx.dir.path;
 	const packageManager = ctx.data.node_package_manager;

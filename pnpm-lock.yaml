@@ -15,8 +15,8 @@ dependencies:
     specifier: ^9.3.0
     version: 9.3.0
   poopgen:
-    specifier: ^0.2.3
-    version: 0.2.3
+    specifier: ^0.2.4
+    version: 0.2.4
 
 devDependencies:
   '@types/node':
@@ -1327,8 +1327,8 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /poopgen@0.2.3:
-    resolution: {integrity: sha512-bfWUUrdp9BLZmH0TsVxPmerph1fBdTaA117BQKe5P1vH+/duehSlVsresP4H6DMZc4RpHtXlc9YL2RLdcGJh1w==}
+  /poopgen@0.2.4:
+    resolution: {integrity: sha512-TznCbm0eCVLb/AhMVjQmeyzGErw8bqWAaewZJqlo/2pYRBLjFPZn+wgi7Gp3SiNhfLSJj40InHOFTWrtStTTIw==}
     dependencies:
       ejs: 3.1.10
       execa: 9.3.0

@@ -32,7 +32,7 @@
 		"README.md"
 	],
 	"scripts": {
-		"build": "pnpm clean:dist && tsup src/index.ts --dts --format esm,cjs",
+		"build": "tsup",
 		"format": "prettier --write .",
 		"publish-package": "pnpm build && pnpm publish",
 		"clean": "pnpm clean:dist && pnpm clean:modules",

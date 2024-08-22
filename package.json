@@ -1,6 +1,6 @@
 {
 	"name": "create-ts-lib-gen",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"description": "Quickly generate a TS library",
 	"license": "MIT",
 	"type": "module",
@@ -18,7 +18,7 @@
 		"url": "https://github.com/WLowe10/ts-lib-gen"
 	},
 	"scripts": {
-		"build": "tsup src/cli.ts --dts --format esm",
+		"build": "tsup src/cli.ts --format esm",
 		"format": "prettier --write .",
 		"publish-package": "pnpm build && pnpm publish",
 		"clean": "pnpm clean:dist && pnpm clean:modules && pnpm clean:dest",
@@ -39,7 +39,7 @@
 		"@clack/prompts": "^0.7.0",
 		"chalk": "^5.3.0",
 		"execa": "^9.3.0",
-		"poopgen": "^0.2.3"
+		"poopgen": "^0.2.4"
 	},
 	"devDependencies": {
 		"@types/node": "^20.14.13",
